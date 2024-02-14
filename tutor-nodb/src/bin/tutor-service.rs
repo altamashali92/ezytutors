@@ -9,6 +9,9 @@ mod state;
 #[path ="../routes.rs"]
 mod routes;
 
+#[path = "../models.rs"]
+mod models;
+
 use routes::*;
 use state::AppState;
 
@@ -17,6 +20,7 @@ async fn main() -> io::Result<()> {
     let shared_data = web::Data::new(AppState {
         visit_count: Mutex::new(0),
         health_check_response: "I'm good. You?".to_string(),
+        courses: Mutex::new(vec![]),
     });
     let app = move || {
         App::new()
