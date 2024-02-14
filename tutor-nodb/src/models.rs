@@ -4,14 +4,14 @@ use chrono::NaiveDateTime;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Course {
-    pub tutor_id: i32,
-    pub course_id: Option<String>,
+    pub tutor_id: usize,
+    pub course_id: Option<usize>,
     pub course_name: String,
     pub posted_time: Option<NaiveDateTime>,
 }
 
 // convert data from incoming request to Course struct
-impl from <web::Json<Course>> for Course {
+impl From <web::Json<Course>> for Course {
     fn from(course: web::Json<Course>) -> Self {
         Course {
             tutor_id: course.tutor_id,
